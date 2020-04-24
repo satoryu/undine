@@ -1,6 +1,18 @@
-require "undine/version"
+# frozen_string_literal: true
+
+require 'undine/version'
+require 'cgi'
 
 module Undine
-  class Error < StandardError; end
-  # Your code goes here...
+  def self.load
+    at_exit do
+      exception = $!
+
+      unless exception.nil?
+        search_url = "https://www.google.com/search?q=#{CGI.escape(exception.message)}"
+        puts search_url
+        system "open '#{search_url}'"
+      end
+    end
+  end
 end

@@ -1,28 +1,51 @@
 # Undine
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/undine`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Undine is a gem to help your development experience: When an exception unrescued in your  code is raised, opens google search with the errror message in your browser.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'undine'
+gem 'undine', group: :development
 ```
 
 And then execute:
 
-    $ bundle install
+```sh
+    bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install undine
+```sh
+    gem install undine
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Just `require 'undine'` and `Undine.load`. That's it.
+
+### Example
+
+```ruby
+require 'undine'
+
+Undine.load
+
+def something_function
+  'hoge'.foo
+rescue => e
+  warn e.message
+  raise e
+end
+
+something_function
+```
+
+`Undine.load` registers a post process to catch an unrescued exception and google its message.
+In this code, `NoMethodError` raises as `String` does not have `foo` method.
+As executing this code, you are going to see google search page with the error message: https://www.google.com/search?q=undefined+method+%60foo%27+for+%22hoge%22%3AString%0ADid+you+mean%3F++for
 
 ## Development
 
