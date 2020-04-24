@@ -10,7 +10,7 @@ module Undine
 
       unless exception.nil?
         search_url = "https://www.google.com/search?q=#{CGI.escape(exception.message)}"
-        puts search_url
+
         system "open '#{search_url}'"
       end
     end
