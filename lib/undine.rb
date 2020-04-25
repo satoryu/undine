@@ -3,16 +3,22 @@
 require 'undine/version'
 require 'cgi'
 
-module Undine
+class Undine
   def self.load
     at_exit do
       exception = $!
 
-      unless exception.nil?
-        search_url = "https://www.google.com/search?q=#{CGI.escape(exception.message)}"
-
-        system "open '#{search_url}'"
-      end
+      Undine.process(exception) unless exception.nil?
     end
+  end
+
+  def self.process(exception)
+    new.process(exception)
+  end
+
+  def process(exception)
+    url = "https://www.google.com/search?q=#{CGI.escape(exception.message)}"
+
+    system "open '#{url}'"
   end
 end

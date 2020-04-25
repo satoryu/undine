@@ -1,9 +1,15 @@
-RSpec.describe Undine do
-  it "has a version number" do
-    expect(Undine::VERSION).not_to be nil
-  end
+require 'spec_helper'
 
-  it "does something useful" do
-    expect(false).to eq(true)
+RSpec.describe Undine do
+  let(:exception) { Exception.new('hoge') }
+
+  describe '#process' do
+    subject { Undine.new }
+
+    it 'uses system method to open browser' do
+      expect(subject).to receive(:system).with("open 'https://www.google.com/search?q=hoge'")
+
+      subject.process(exception)
+    end
   end
 end
