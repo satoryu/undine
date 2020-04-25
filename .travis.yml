@@ -8,7 +8,7 @@ rvm:
   - ruby-head
 before_install: gem install bundler -v 2.1.4
 
-scripts: bundle exec rake
+script: bundle exec rake
 
 matrix:
   allow_failures:
