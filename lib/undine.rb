@@ -2,11 +2,12 @@
 
 require 'undine/version'
 require 'cgi'
+require 'English'
 
 class Undine
   def self.load
     at_exit do
-      exception = $!
+      exception = $ERROR_INFO
 
       Undine.process(exception) unless exception.nil?
     end
