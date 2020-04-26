@@ -1,5 +1,6 @@
 # Undine
 
+[![Gem Version](https://badge.fury.io/rb/undine.svg)](https://badge.fury.io/rb/undine)
 [![Build Status](https://travis-ci.org/satoryu/undine.svg?branch=master)](https://travis-ci.org/satoryu/undine)
 
 Undine is a gem to help your development experience: When an exception unrescued in your  code is raised, opens google search with the errror message in your browser.
