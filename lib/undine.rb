@@ -30,11 +30,11 @@ class Undine
     system "open '#{url}'"
   end
 
-  private
-
   def query_message_from(exception)
     @configuration.query_message_from.call(exception)
   end
+
+  private
 
   def ignore?(exception)
     return false unless @configuration.respond_to?(:except_for)
