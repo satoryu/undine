@@ -12,6 +12,17 @@ RSpec.describe Undine do
 
       subject.process(exception)
     end
+
+    context 'When except_for is configured' do
+      let(:exception) { SystemExit.new }
+      let(:configuration) { double(:config, except_for: SystemExit) }
+
+      it 'does not open browser' do
+        expect(subject).to_not receive(:system)
+
+        subject.process(exception)
+      end
+    end
   end
 
   describe '#query_message_from' do
