@@ -50,6 +50,19 @@ something_function
 In this code, `NoMethodError` raises as `String` does not have `foo` method.
 As executing this code, you are going to see google search page with the error message: https://www.google.com/search?q=undefined+method+%60foo%27+for+%22hoge%22%3AString%0ADid+you+mean%3F++for
 
+## Configuration
+
+`Undine.configure` is for users to customize behavior of `Undine`.
+The method gives a given block `Undine::Configuration` object.
+
+```ruby
+Undine.configure do |config|
+  config.query_message_from = :message.to_proc # default
+
+  config.except_for = SystemExit # default
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
