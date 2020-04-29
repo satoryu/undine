@@ -23,6 +23,8 @@ class Undine
   end
 
   def process(exception)
+    return if ignore?(exception)
+
     url = "https://www.google.com/search?q=#{CGI.escape(query_message_from(exception))}"
 
     system "open '#{url}'"
@@ -30,5 +32,14 @@ class Undine
 
   def query_message_from(exception)
     @configuration.query_message_from.call(exception)
+  end
+
+  private
+
+  def ignore?(exception)
+    return false unless @configuration.respond_to?(:except_for)
+
+    ignored_exceptions = Array(@configuration.except_for)
+    ignored_exceptions.any? { |klass| exception.is_a?(klass) }
   end
 end
